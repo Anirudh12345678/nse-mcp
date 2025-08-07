@@ -42,8 +42,9 @@ async function get_trend({ symbol, days }: { symbol: string; days?: number | und
     };
   }
 
-  const startPrice = history[0]?.data[0]?.CH_CLOSING_PRICE;
-  const endPrice = history.at(-1)?.data[0]?.CH_CLOSING_PRICE;
+  const len = history.length;
+  const endPrice = history[len - 1]?.data[0]?.CH_CLOSING_PRICE;
+  const startPrice = history[0]?.data.at(-1)?.CH_CLOSING_PRICE;
   if (startPrice === undefined || endPrice === undefined) {
     return {
       content: [
